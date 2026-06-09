@@ -346,7 +346,51 @@
         .certification-card p {
             color: var(--text-secondary);
         }
-
+        
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .achievement-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+        }
+        
+        .achievement-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .achievement-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .achievement-card li {
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .achievement-card li::before {
+            content: "🏆";
+            position: absolute;
+            left: 0;
+        }
         /* Experience Section */
         .experience-timeline {
             position: relative;
@@ -582,7 +626,7 @@
             <div class="hero-content">
                 <h1>Hi, I'm Sadhik Salim</h1>
                 <p class="subtitle">MBA Finance Professional & Data Analytics Expert</p>
-                <p>Skilled in Financial Reporting, Data Analytics, and Business Intelligence. Passionate about leveraging data-driven insights to solve complex financial challenges and drive business growth.</p>
+                <p>Finance and Accounting Professional with experience in GST compliance, financial reporting, bookkeeping, bank reconciliation, inventory reconciliation, and business analytics. Skilled in Tally Prime, Zoho Books, Advanced Excel, Power BI, and Tableau.</p>
                 <div class="hero-buttons">
                     <a href="#experience" class="btn btn-primary">View My Work</a>
                     <a href="#contact" class="btn btn-outline">Get In Touch</a>
@@ -603,9 +647,10 @@
 
             </div>
             <div class="about-text">
-                <p>I'm a passionate MBA Finance professional with expertise in financial reporting, data analytics, and business intelligence. Currently pursuing my Master's degree at Marian Institute of Management, Kuttikkanam, with a strong foundation in Commerce (Finance & Taxation) from Mahatma Gandhi University.</p>
-                <p>My journey spans across financial analysis, GST compliance, and data visualization using tools like Power BI, Tally Prime, and Excel. I've gained practical experience through internships at Muthoottu Mini Financiers and Highrange Infrastructure, where I've handled everything from payroll management to marketing campaigns.</p>
-                <p>I believe in continuous learning and have completed multiple certifications in data analytics, financial accounting, and business intelligence. When I'm not analyzing data, you can find me playing badminton or volunteering with community service initiatives through NSS.</p>
+                <p>I am an MBA Finance Graduate from Marian Institute of Management, Kuttikkanam, with a strong academic background in Finance, Accounting, Taxation, and Business Analytics. I have also qualified UGC NET and was recognized as the Best Outgoing Student of the MBA Batch 2024–2026.</p>
+                <p>My professional experience includes working as Assistant Accountant at Highrange Infrastructure LLP, Finance Associate Intern at CBS Ventures Pvt. Ltd., and Summer Intern at Muthoottu Mini Financiers Ltd. I have gained practical exposure in bookkeeping, GST compliance, bank reconciliation, inventory reconciliation, payroll processing, financial reporting, and client accounting.</p>
+                <p>I am proficient in Tally Prime, Zoho Books, Advanced Excel, Power BI, Tableau, Python, and financial data analysis. My career interests include Finance, Accounting, Financial Analysis, Business Analytics, and Academic Research.</p>
+                <p>I have served as Finance Club President, represented my institution in finance competitions, presented papers at national and international conferences, and received multiple awards for leadership and academic excellence.</p>
                 <p><strong>Location:</strong> Idukki, Kerala<br>
                 <strong>Email:</strong> sadhiksalim001@gmail.com<br>
                 <strong>Phone:</strong> +91 9544732071</p>
@@ -622,6 +667,7 @@
                 <div class="skill-items">
                     <span class="skill-tag">Financial Reporting</span>
                     <span class="skill-tag">Tally Prime</span>
+                    <span class="skill-tag">Zoho Books</span>
                     <span class="skill-tag">GST Compliance</span>
                     <span class="skill-tag">Payroll Management</span>
                     <span class="skill-tag">Cost Analysis</span>
@@ -720,13 +766,81 @@
                 </div>
                 <p>Applied accounting concepts and financial ratios to real-world business cases.</p>
             </div>
+             <div class="certification-card">
+                <div class="certification-header">
+                    <div class="certification-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div>
+                        <h3>Domain Analytics in Finance using R and Power BI</h3>
+                        <div class="certification-provider">KPMG</div>
+                    </div>
+                </div>
+                <p>Completed hands-on projects in financial analytics using R and Power BI.</p>
+            </div>
         </div>
     </section>
+        <!-- Achievements Section -->
+    <section id="achievements" class="section">
 
+<h2 class="section-title fade-in">
+    Achievements & Leadership
+</h2>
+
+<div class="achievements-grid fade-in">
+
+    <div class="achievement-card">
+        <h3>Academic Achievements</h3>
+        <ul>
+            <li>UGC NET Qualified</li>
+            <li>Best Outgoing Student – MBA Batch 2024–2026</li>
+            <li>National & International Conference Presenter</li>
+        </ul>
+    </div>
+
+    <div class="achievement-card">
+        <h3>Leadership</h3>
+        <ul>
+            <li>President – Finance Club</li>
+            <li>External Design Team Head – Caligo 2025</li>
+            <li>Core Committee Member – National Seminar</li>
+            <li>Emerging Leader Award Recipient</li>
+        </ul>
+    </div>
+
+    <div class="achievement-card">
+        <h3>Competitions & Awards</h3>
+        <ul>
+            <li>1st Prize – Finance Game, Talentime 40 (CUSAT)</li>
+            <li>1st Prize – Finance Game, Simthesis 17.0</li>
+            <li>Multiple Inter-Collegiate Finance Competition Winner</li>
+        </ul>
+    </div>
+
+</div>
+
+</section>
+    
     <!-- Experience Section -->
     <section id="experience" class="section">
         <h2 class="section-title fade-in">Professional Experience</h2>
         <div class="experience-timeline fade-in">
+             <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-date">May 2026</div>
+                    <h3 class="timeline-title">Finance Associate Intern</h3>
+                    <div class="timeline-company">CBS Ventures Pvt. Ltd., Kochi</div>
+                    <div class="timeline-description">
+                        <ul>
+                            <li>Managed accounting and bookkeeping activities for multiple client accounts using Zoho Books and Tally Prime.</li>
+                            <li>Performed bank reconciliation, inventory reconciliation, and GSTR-2B reconciliation to ensure financial accuracy and compliance.</li>
+                            <li>Processed purchase bills, sales invoices, purchase orders, and routine accounting entries.</li>
+                            <li>Worked with multiple client datasets while ensuring compliance and data accuracy.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
                 <div class="timeline-content">
