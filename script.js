@@ -13,6 +13,11 @@ anchor.addEventListener('click', function (event) {
 
     const targetId = this.getAttribute('href');
 
+    // Ignore empty hash links
+    if (!targetId || targetId === '#') {
+        return;
+    }
+
     const target = document.querySelector(targetId);
 
     if (!target) {
@@ -38,8 +43,7 @@ Navbar Scroll Effect
 window.addEventListener('scroll', function () {
 
 ```
-const navbar =
-    document.querySelector('.navbar');
+const navbar = document.querySelector('.navbar');
 
 if (!navbar) {
     return;
@@ -64,79 +68,74 @@ if (window.scrollY > 100) {
 Fade-in Animation on Scroll
 ======================================== */
 
+const fadeElements = document.querySelectorAll('.fade-in');
+
+if ('IntersectionObserver' in window) {
+
+```
 const observerOptions = {
-
-```
-threshold: 0.1,
-
-rootMargin:
-    '0px 0px -50px 0px'
-```
-
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
 };
 
-const observer =
-new IntersectionObserver(
-function (entries) {
+const observer = new IntersectionObserver(
+    function (entries) {
 
-```
         entries.forEach(entry => {
 
             if (entry.isIntersecting) {
 
-                entry.target.classList.add(
-                    'visible'
-                );
+                entry.target.classList.add('visible');
+
+                // Stop observing once the animation has happened
+                observer.unobserve(entry.target);
 
             }
 
         });
 
     },
-
     observerOptions
 );
-```
 
-document
-.querySelectorAll('.fade-in')
-.forEach(element => {
-
-```
+fadeElements.forEach(element => {
     observer.observe(element);
-
 });
 ```
+
+} else {
+
+```
+// Fallback for older browsers
+fadeElements.forEach(element => {
+    element.classList.add('visible');
+});
+```
+
+}
 
 /* ========================================
 Active Navigation Link
 ======================================== */
 
-window.addEventListener('scroll', function () {
+function updateActiveNavigation() {
 
 ```
-const sections =
-    document.querySelectorAll(
-        'section[id]'
-    );
+const sections = document.querySelectorAll('section[id]');
 
-const navLinks =
-    document.querySelectorAll(
-        '.nav-links a'
-    );
+const navLinks = document.querySelectorAll('.nav-links a');
 
+if (!sections.length || !navLinks.length) {
+    return;
+}
 
 let currentSection = '';
 
-
 sections.forEach(section => {
 
-    const sectionTop =
-        section.offsetTop;
+    const sectionTop = section.offsetTop;
 
-    const sectionHeight =
-        section.clientHeight;
-
+    const sectionHeight = section.offsetHeight;
 
     if (
         window.scrollY >=
@@ -150,38 +149,35 @@ sections.forEach(section => {
 
 });
 
-
 navLinks.forEach(link => {
 
-    link.classList.remove(
-        'active'
-    );
-
+    link.classList.remove('active');
 
     if (
         link.getAttribute('href') ===
         '#' + currentSection
     ) {
 
-        link.classList.add(
-            'active'
-        );
+        link.classList.add('active');
 
     }
 
 });
 ```
 
-});
+}
+
+window.addEventListener(
+'scroll',
+updateActiveNavigation
+);
 
 /* ========================================
 Contact Form
 ======================================== */
 
 const contactForm =
-document.querySelector(
-'#contact-form'
-);
+document.querySelector('#contactForm');
 
 if (contactForm) {
 
@@ -192,11 +188,9 @@ contactForm.addEventListener(
 
         event.preventDefault();
 
-
         alert(
             'Thank you for your message! I will get back to you soon.'
         );
-
 
         contactForm.reset();
 
@@ -205,3 +199,19 @@ contactForm.addEventListener(
 ```
 
 }
+
+/* ========================================
+Initial Navigation State
+======================================== */
+
+document.addEventListener(
+'DOMContentLoaded',
+function () {
+
+```
+    updateActiveNavigation();
+
+}
+```
+
+);
