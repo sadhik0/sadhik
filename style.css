@@ -388,26 +388,59 @@ body {
     margin-top: 3rem;
 }
 
+/* Outer card = perspective container + hover lift */
 .certification-card {
-    background: var(--card-bg);
+    perspective: 1200px;
+    height: 260px;
     border-radius: 20px;
-    padding: 2rem;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(99, 102, 241, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 .certification-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 30px 80px rgba(99, 102, 241, 0.3);
 }
 
-.certification-header {
+/* Inner card = the piece that actually rotates */
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease;
+    transform-style: preserve-3d;
+}
+
+.certification-card.is-flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Shared face styling */
+.card-front,
+.card-back {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 20px;
+    padding: 2rem;
+    background: var(--card-bg);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    box-shadow: 0 30px 80px rgba(99, 102, 241, 0.15);
+}
+
+.card-front {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card-back {
+    transform: rotateY(180deg);
     display: flex;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
 }
 
+/* Front face content */
 .certification-icon {
     width: 50px;
     height: 50px;
@@ -418,6 +451,7 @@ body {
     justify-content: center;
     color: white;
     font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .certification-card h3 {
@@ -428,11 +462,19 @@ body {
 .certification-provider {
     color: var(--accent-color);
     font-weight: 600;
-    margin-bottom: 1rem;
 }
 
-.certification-card p {
+/* Back face content */
+.card-back p {
     color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Reduced motion: skip the rotation, just swap instantly */
+@media (prefers-reduced-motion: reduce) {
+    .card-inner {
+        transition: none;
+    }
 }
 
 /* Achievements Section */
