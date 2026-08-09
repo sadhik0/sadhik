@@ -36,6 +36,28 @@ document.querySelectorAll('.fade-in').forEach(el => {
     observer.observe(el);
 });
 
+// Certification card flip
+document.querySelectorAll('.certification-card').forEach(card => {
+    const back = card.querySelector('.card-back');
+
+    card.addEventListener('click', function () {
+        const flipped = this.classList.toggle('is-flipped');
+        back.setAttribute('aria-hidden', flipped ? 'false' : 'true');
+    });
+
+    // Keyboard accessibility: allow Enter/Space to flip when focused
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', 'Show certification details');
+
+    card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.click();
+        }
+    });
+});
+
 // Active navigation link
 window.addEventListener('scroll', function() {
     const sections = document.querySelectorAll('section[id]');
