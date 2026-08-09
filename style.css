@@ -391,7 +391,7 @@ body {
 /* Outer card = perspective container + hover lift */
 .certification-card {
     perspective: 1200px;
-    height: 260px;
+    height: 180px;
     border-radius: 20px;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -422,7 +422,7 @@ body {
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     border-radius: 20px;
-    padding: 2rem;
+    padding: 1.5rem;
     background: var(--card-bg);
     border: 1px solid rgba(99, 102, 241, 0.2);
     box-shadow: 0 30px 80px rgba(99, 102, 241, 0.15);
