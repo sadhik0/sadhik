@@ -384,7 +384,8 @@ body {
 .certifications-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    align-items: start;
+    gap: 1.25rem 2rem;
     margin-top: 3rem;
 }
 
