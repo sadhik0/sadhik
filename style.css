@@ -426,9 +426,18 @@ body {
     background: var(--card-bg);
     border: 1px solid rgba(99, 102, 241, 0.2);
     box-shadow: 0 30px 80px rgba(99, 102, 241, 0.15);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Border light-up + glow on hover — targets the faces, not the outer card */
+.certification-card:hover .card-front,
+.certification-card:hover .card-back {
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 30px 80px rgba(99, 102, 241, 0.3);
 }
 
 .card-front {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -464,6 +473,16 @@ body {
     font-weight: 600;
 }
 
+/* Flip hint icon — bottom-right corner of front face */
+.flip-hint {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
 /* Back face content */
 .card-back p {
     color: var(--text-secondary);
@@ -476,7 +495,6 @@ body {
         transition: none;
     }
 }
-
 /* Achievements Section */
 .achievements-grid {
     display: grid;
