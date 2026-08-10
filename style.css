@@ -457,11 +457,9 @@ body {
 }
 
 .card-front {
-    position: relative;  
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .card-back {
@@ -510,13 +508,6 @@ body {
     font-size: 0.85rem;
     color: var(--text-secondary);
     opacity: 0.6;
-    transition: opacity 0.3s ease, color 0.3s ease;   /* add this for smooth hover animation */
-}
-
-/* Optional polish — brighten flip icon on card hover */
-.certification-card:hover .flip-hint {
-    opacity: 1;
-    color: var(--accent-color);
 }
 
 /* Back face content */
