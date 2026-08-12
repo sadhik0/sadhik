@@ -209,9 +209,6 @@ body {
 .marquee-section {
     width: 100%;
     overflow: hidden;
-    background: linear-gradient(90deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.08));
-    border-top: 1px solid rgba(99, 102, 241, 0.2);
-    border-bottom: 1px solid rgba(99, 102, 241, 0.2);
     padding: 1.1rem 0;
     position: relative;
 }
@@ -242,7 +239,6 @@ body {
     letter-spacing: 0.12em;
     color: var(--text-primary);
     white-space: nowrap;
-    border-right: 1px solid rgba(203, 213, 225, 0.15);
 }
 
 .marquee-marker {
@@ -542,14 +538,14 @@ body {
 /* Certifications Section */
 .certifications-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
     margin-top: 3rem;
 }
 
 .certification-card {
     perspective: 1200px;
-    height: 220px;
+    height: 165px;
     cursor: pointer;
     outline: none;
 }
@@ -882,7 +878,7 @@ a.contact-item:hover {
     }
 
     .certification-card {
-        height: 200px;
+        height: 175px;
     }
 
     .carousel-wrapper {
