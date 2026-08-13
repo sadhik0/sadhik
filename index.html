@@ -111,7 +111,7 @@
                         </div>
                         <div class="project-info">
                             <h3>ReconPro Lite</h3>
-                            <p>Browser-based ledger vs. bank/GST statement reconciliation tool. Upload two Excel files, map columns, and get exact, partial, and unmatched records instantly.</p>
+                            <p>Browser-based ledger vs. bank/GST statement reconciliation tool. Upload two Excel files, map columns, and get exact, partial, and unmatched records instantly &mdash; entirely client-side, no data leaves the device.</p>
                         </div>
                     </a>
 
@@ -150,7 +150,7 @@
                         </div>
                         <div class="project-info">
                             <h3>TaxPilot</h3>
-                            <p>An Income Tax calculator. That estimates tax liability, compares tax regimes, and provides tax planning insights based on the latest applicable rules.&mdash; entirely client-side, no data leaves the device.</p>
+                            <p>Browser-based income tax and GST planning assistant. Walks through tax computation scenarios and liability estimates to help with return preparation and planning &mdash; entirely client-side, no data leaves the device.</p>
                         </div>
                     </a>
 
@@ -163,7 +163,7 @@
                         </div>
                         <div class="project-info">
                             <h3>FinancialScope</h3>
-                            <p>Financial statement analysis dashboard. That calculates key financial ratios from financial statements and provides insights into a company's financial health.</p>
+                            <p>Financial statement analysis dashboard. Turns raw financial statements into key ratios and visual summaries to support faster, clearer business and investment decisions.</p>
                         </div>
                     </a>
 
@@ -506,6 +506,31 @@
         </div>
         <p>&copy; 2025 Sadhik Salim. All rights reserved.</p>
     </footer>
+
+    <!-- Sadhik AI Portfolio Assistant -->
+    <button id="ai-toggle-btn" class="ai-toggle-btn" aria-label="Open Sadhik AI portfolio assistant">
+        <i class="fas fa-wand-magic-sparkles"></i>
+        <span class="ai-tooltip">Ask Sadhik AI</span>
+    </button>
+
+    <div id="ai-chat-window" class="ai-chat-window" role="dialog" aria-label="Sadhik AI portfolio assistant chat">
+        <div class="ai-chat-header">
+            <div>
+                <h3><i class="fas fa-wand-magic-sparkles"></i> Sadhik AI</h3>
+                <span class="ai-chat-subtitle">Portfolio Assistant</span>
+            </div>
+            <button id="ai-close-btn" class="ai-close-btn" aria-label="Close chat">
+                <i class="fas fa-xmark"></i>
+            </button>
+        </div>
+        <div id="ai-chat-messages" class="ai-chat-messages"></div>
+        <div class="ai-chat-input-row">
+            <input type="text" id="ai-chat-input" placeholder="Ask me something..." aria-label="Type your question" autocomplete="off">
+            <button id="ai-send-btn" class="ai-send-btn" aria-label="Send message">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
