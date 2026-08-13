@@ -1,10 +1,14 @@
-// Fix: prevent stale #hash (from browser history/autocomplete) from
-// forcing the page to open scrolled to a section instead of the top.
+// Fix: browsers auto-restore the last scroll position on refresh/reopen
+// (independent of URL hash). Force every load to start at the top.
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+
 window.addEventListener('load', function () {
     if (window.location.hash) {
         history.replaceState(null, document.title, window.location.pathname + window.location.search);
-        window.scrollTo(0, 0);
     }
+    window.scrollTo(0, 0);
 });
 
 // Smooth scrolling for navigation links
