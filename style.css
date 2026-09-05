@@ -175,6 +175,8 @@ body {
 .hero-image {
     text-align: center;
     animation: float 6s ease-in-out infinite;
+    position: relative;
+    display: inline-block;
 }
 
 .profile-img {
@@ -186,6 +188,45 @@ body {
     background: var(--gradient);
     padding: 5px;
     box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
+}
+
+/* OPTIONAL ACCENT: swinging tag near hero photo — delete this whole block
+   (plus the .hero-swing-tag element in index.html) to remove cleanly. */
+.hero-swing-tag {
+    position: absolute;
+    top: 6px;
+    right: -10px;
+    transform-origin: top center;
+    animation: heroSwing 3.2s ease-in-out infinite;
+    background: rgba(30, 41, 59, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    color: var(--text-primary);
+    padding: 0.45rem 0.9rem;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
+}
+
+.hero-swing-tag i {
+    color: var(--accent-color);
+    margin-right: 0.3rem;
+}
+
+@keyframes heroSwing {
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(6deg); }
+}
+
+@media (max-width: 768px) {
+    .hero-swing-tag {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.7rem;
+        right: 0;
+    }
 }
 
 /* Floating Animation */
@@ -311,6 +352,31 @@ body {
     width: 100%;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* Glare hover — subtle mouse-tracked light sweep, desktop only */
+.glare-hover {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.glare-hover .glare-layer {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+        circle 180px at var(--glare-x, 50%) var(--glare-y, 50%),
+        rgba(255, 255, 255, 0.25),
+        rgba(255, 255, 255, 0) 60%
+    );
+    transition: opacity 0.3s ease;
+}
+
+.glare-hover:hover .glare-layer {
+    opacity: 1;
 }
 
 .about-text p {
@@ -492,6 +558,23 @@ body {
     pointer-events: none;
 }
 
+.project-badge {
+    position: absolute;
+    top: 0.7rem;
+    left: 0.7rem;
+    z-index: 3;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: var(--text-primary);
+    border: 1px solid rgba(99, 102, 241, 0.4);
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+}
+
 .project-preview-overlay {
     position: absolute;
     inset: 0;
@@ -536,11 +619,24 @@ body {
 }
 
 /* Certifications Section */
-.certifications-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.carousel-hint {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-top: -1.5rem;
+    margin-bottom: 0;
+}
+
+.cert-carousel-wrapper {
+    margin-top: 2rem;
+}
+
+.cert-carousel-wrapper .carousel-track {
     gap: 1.5rem;
-    margin-top: 3rem;
+}
+
+.cert-carousel-wrapper .certification-card {
+    flex-shrink: 0;
 }
 
 .certification-card {
@@ -871,10 +967,6 @@ a.contact-item:hover {
     .profile-img {
         width: 250px;
         height: 250px;
-    }
-
-    .certifications-grid {
-        grid-template-columns: 1fr;
     }
 
     .certification-card {
