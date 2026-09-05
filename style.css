@@ -315,41 +315,6 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-/* Glare hover — diagonal glow bar sweeping bottom-right to top-left and back */
-.glare-hover {
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-}
-
-.glare-hover .glare-layer {
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        115deg,
-        transparent 45%,
-        rgba(255, 255, 255, 0.4) 50%,
-        transparent 55%
-    );
-    transform: translate(35%, 35%);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.glare-hover:hover .glare-layer {
-    opacity: 1;
-    animation: glareSweep 2.4s ease-in-out infinite alternate;
-}
-
-@keyframes glareSweep {
-    0% { transform: translate(35%, 35%); }
-    100% { transform: translate(-35%, -35%); }
-}
-
 .about-text p {
     font-size: 1.1rem;
     color: var(--text-secondary);
@@ -400,6 +365,7 @@ body {
 
 /* Projects Carousel */
 .carousel-wrapper {
+    --vc: 3;
     position: relative;
     margin-top: 3rem;
     display: flex;
@@ -491,7 +457,7 @@ body {
 
 .project-card {
     display: block;
-    flex-shrink: 0;
+    flex: 0 0 calc((100% - (var(--vc) - 1) * 2rem) / var(--vc));
     background: var(--card-bg);
     border-radius: 20px;
     overflow: hidden;
@@ -599,6 +565,7 @@ body {
 }
 
 .cert-carousel-wrapper {
+    --vc: 3;
     margin-top: 2rem;
 }
 
@@ -607,7 +574,7 @@ body {
 }
 
 .cert-carousel-wrapper .certification-card {
-    flex-shrink: 0;
+    flex: 0 0 calc((100% - (var(--vc) - 1) * 1.5rem) / var(--vc));
 }
 
 .certification-card {
@@ -779,12 +746,6 @@ body {
     border: 4px solid var(--dark-bg);
 }
 
-@property --border-glow-angle {
-    syntax: '<angle>';
-    inherits: false;
-    initial-value: 0deg;
-}
-
 .timeline-content {
     position: relative;
     background: var(--card-bg);
@@ -800,28 +761,23 @@ body {
     inset: 0;
     border-radius: inherit;
     padding: 1.5px;
-    background: conic-gradient(
-        from var(--border-glow-angle),
+    background: radial-gradient(
+        220px circle at var(--glow-x, 50%) var(--glow-y, 50%),
         var(--primary-color),
-        var(--accent-color),
-        var(--secondary-color),
-        var(--primary-color)
+        var(--accent-color) 45%,
+        transparent 75%
     );
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    opacity: 0.45;
-    animation: borderGlowRotate 5s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
     pointer-events: none;
     z-index: -1;
 }
 
 .timeline-content:hover::before {
-    opacity: 0.9;
-}
-
-@keyframes borderGlowRotate {
-    to { --border-glow-angle: 360deg; }
+    opacity: 1;
 }
 
 .timeline-date {
