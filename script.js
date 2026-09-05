@@ -92,6 +92,10 @@ function initCarousel(config) {
     const dotsContainer = document.querySelector(config.dotsSelector);
     const viewport = wrapper.querySelector('.carousel-viewport');
 
+    // Browsers can restore the previous horizontal scroll position of this
+    // nested carousel viewport after refresh/reopen. Always start at slide 1.
+    viewport.scrollLeft = 0;
+
     const GAP = config.gap || 32;
     let visibleCount = config.desktopCount || 3;
     let current = 0;
@@ -159,6 +163,8 @@ function initCarousel(config) {
     }
 
     function layout() {
+        // Reset nested horizontal scroll restoration before calculating layout.
+        viewport.scrollLeft = 0;
         applyVisibleCount();
         buildDots();
         render();
@@ -232,6 +238,14 @@ function initCarousel(config) {
         window.addEventListener('resize', layout);
     }
     window.addEventListener('load', layout);
+
+    // Also reset the viewport after refresh and browser back/forward restores.
+    window.addEventListener('pageshow', function () {
+        viewport.scrollLeft = 0;
+        current = 0;
+        layout();
+    });
+
     layout();
 
     return { goPrev, goNext };
