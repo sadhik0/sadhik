@@ -190,45 +190,6 @@ body {
     box-shadow: 0 20px 60px rgba(99, 102, 241, 0.3);
 }
 
-/* OPTIONAL ACCENT: swinging tag near hero photo — delete this whole block
-   (plus the .hero-swing-tag element in index.html) to remove cleanly. */
-.hero-swing-tag {
-    position: absolute;
-    top: 6px;
-    right: -10px;
-    transform-origin: top center;
-    animation: heroSwing 3.2s ease-in-out infinite;
-    background: rgba(30, 41, 59, 0.75);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(99, 102, 241, 0.35);
-    color: var(--text-primary);
-    padding: 0.45rem 0.9rem;
-    border-radius: 12px;
-    font-size: 0.78rem;
-    font-weight: 600;
-    white-space: nowrap;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.3);
-}
-
-.hero-swing-tag i {
-    color: var(--accent-color);
-    margin-right: 0.3rem;
-}
-
-@keyframes heroSwing {
-    0%, 100% { transform: rotate(-6deg); }
-    50% { transform: rotate(6deg); }
-}
-
-@media (max-width: 768px) {
-    .hero-swing-tag {
-        font-size: 0.7rem;
-        padding: 0.35rem 0.7rem;
-        right: 0;
-    }
-}
-
 /* Floating Animation */
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
@@ -354,7 +315,7 @@ body {
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-/* Glare hover — subtle mouse-tracked light sweep, desktop only */
+/* Glare hover — diagonal glow bar sweeping bottom-right to top-left and back */
 .glare-hover {
     position: relative;
     overflow: hidden;
@@ -363,20 +324,30 @@ body {
 
 .glare-hover .glare-layer {
     position: absolute;
-    inset: 0;
-    border-radius: 20px;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        115deg,
+        transparent 45%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 55%
+    );
+    transform: translate(35%, 35%);
     pointer-events: none;
     opacity: 0;
-    background: radial-gradient(
-        circle 180px at var(--glare-x, 50%) var(--glare-y, 50%),
-        rgba(255, 255, 255, 0.25),
-        rgba(255, 255, 255, 0) 60%
-    );
     transition: opacity 0.3s ease;
 }
 
 .glare-hover:hover .glare-layer {
     opacity: 1;
+    animation: glareSweep 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes glareSweep {
+    0% { transform: translate(35%, 35%); }
+    100% { transform: translate(-35%, -35%); }
 }
 
 .about-text p {
@@ -808,11 +779,49 @@ body {
     border: 4px solid var(--dark-bg);
 }
 
+@property --border-glow-angle {
+    syntax: '<angle>';
+    inherits: false;
+    initial-value: 0deg;
+}
+
 .timeline-content {
+    position: relative;
     background: var(--card-bg);
     padding: 2rem;
     border-radius: 15px;
     border: 1px solid rgba(99, 102, 241, 0.2);
+    isolation: isolate;
+}
+
+.timeline-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(
+        from var(--border-glow-angle),
+        var(--primary-color),
+        var(--accent-color),
+        var(--secondary-color),
+        var(--primary-color)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.45;
+    animation: borderGlowRotate 5s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.timeline-content:hover::before {
+    opacity: 0.9;
+}
+
+@keyframes borderGlowRotate {
+    to { --border-glow-angle: 360deg; }
 }
 
 .timeline-date {
