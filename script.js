@@ -72,20 +72,28 @@ window.addEventListener('scroll', function() {
 });
 
 // Generic carousel engine (used for Projects and Certifications)
+//
+// Design notes (rewrite): sizing is handled entirely by CSS via a
+// --vc (visible-count) custom property and a flex-basis calc() on each
+// card — this reacts to the real container width instantly and natively,
+// so there is no JS-measured pixel width to ever go stale. The only
+// thing JS measures is the actual rendered width of a card at the exact
+// moment it needs to build a transform — always a fresh, live
+// measurement, never a cached one — which is what makes the dot
+// indicator and the visible cards guaranteed to agree.
 function initCarousel(config) {
     const wrapper = document.querySelector(config.wrapperSelector);
     if (!wrapper) return;
 
-    const viewport = wrapper.querySelector('.carousel-viewport');
     const track = wrapper.querySelector('.carousel-track');
     const cards = Array.from(track.children);
     const prevBtn = config.arrows ? wrapper.querySelector('.carousel-prev') : null;
     const nextBtn = config.arrows ? wrapper.querySelector('.carousel-next') : null;
     const dotsContainer = document.querySelector(config.dotsSelector);
+    const viewport = wrapper.querySelector('.carousel-viewport');
 
     const GAP = config.gap || 32;
-    let visibleCount = 1;
-    let cardWidth = 0;
+    let visibleCount = config.desktopCount || 3;
     let current = 0;
 
     function getVisibleCount() {
@@ -99,30 +107,23 @@ function initCarousel(config) {
         return Math.max(0, cards.length - visibleCount);
     }
 
-    function layout() {
-        visibleCount = getVisibleCount();
-        const viewportWidth = viewport.clientWidth;
-        let width = (viewportWidth - GAP * (visibleCount - 1)) / visibleCount;
-
-        // Guard against a bad measurement (0/negative/NaN) so the carousel
-        // never freezes on an invalid transform value.
-        if (!Number.isFinite(width) || width <= 0) {
-            width = cardWidth || 0;
-        }
-        cardWidth = width;
-
-        cards.forEach(card => {
-            card.style.width = cardWidth + 'px';
-        });
-
-        const maxIndex = getMaxIndex();
-        if (current > maxIndex) current = maxIndex;
-
-        if (dotsContainer) buildDots(maxIndex);
-        update();
+    // Fresh measurement every time — never cached across calls, so it can
+    // never disagree with what's actually on screen.
+    function getStepPx() {
+        const rect = cards[0].getBoundingClientRect();
+        return rect.width + GAP;
     }
 
-    function buildDots(maxIndex) {
+    function applyVisibleCount() {
+        visibleCount = getVisibleCount();
+        wrapper.style.setProperty('--vc', visibleCount);
+        const maxIndex = getMaxIndex();
+        if (current > maxIndex) current = maxIndex;
+    }
+
+    function buildDots() {
+        if (!dotsContainer) return;
+        const maxIndex = getMaxIndex();
         dotsContainer.innerHTML = '';
         for (let i = 0; i <= maxIndex; i++) {
             const dot = document.createElement('button');
@@ -131,21 +132,25 @@ function initCarousel(config) {
             dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
             dot.addEventListener('click', () => {
                 current = i;
-                update();
+                render();
             });
             dotsContainer.appendChild(dot);
         }
     }
 
-    function update() {
+    // Applies the current index to the screen: transform + disabled
+    // states + active dot. This is the single source of truth for what
+    // gets drawn, called after every navigation and every layout pass.
+    function render() {
         const maxIndex = getMaxIndex();
-        const offset = current * (cardWidth + GAP);
+        const step = getStepPx();
+        const offset = current * step;
         if (Number.isFinite(offset)) {
             track.style.transform = 'translateX(' + (-offset) + 'px)';
         }
 
-        if (prevBtn) prevBtn.classList.toggle('carousel-disabled', current === 0);
-        if (nextBtn) nextBtn.classList.toggle('carousel-disabled', current === maxIndex);
+        if (prevBtn) prevBtn.classList.toggle('carousel-disabled', false);
+        if (nextBtn) nextBtn.classList.toggle('carousel-disabled', false);
 
         if (dotsContainer) {
             const dots = Array.from(dotsContainer.children);
@@ -153,14 +158,24 @@ function initCarousel(config) {
         }
     }
 
+    function layout() {
+        applyVisibleCount();
+        buildDots();
+        render();
+    }
+
+    // Wraparound navigation: past the last slide jumps back to the
+    // first, and vice versa — no more clicking all the way back.
     function goPrev() {
-        current = Math.max(0, current - 1);
-        update();
+        const maxIndex = getMaxIndex();
+        current = current === 0 ? maxIndex : current - 1;
+        render();
     }
 
     function goNext() {
-        current = Math.min(getMaxIndex(), current + 1);
-        update();
+        const maxIndex = getMaxIndex();
+        current = current === maxIndex ? 0 : current + 1;
+        render();
     }
 
     if (prevBtn) prevBtn.addEventListener('click', goPrev);
@@ -208,9 +223,9 @@ function initCarousel(config) {
         }, { passive: false });
     }
 
-    // Re-measure whenever the viewport's real pixel size changes for ANY
-    // reason (window resize, font/icon load reflow, zoom) — not just the
-    // classic 'resize' event, which can miss late layout shifts.
+    // Re-run layout whenever the container's real size changes for ANY
+    // reason (resize, font/icon load reflow, zoom). Sizing itself is
+    // handled by CSS, so this just keeps --vc and the dot count correct.
     if (window.ResizeObserver) {
         new ResizeObserver(() => layout()).observe(viewport);
     } else {
@@ -537,3 +552,14 @@ document.querySelectorAll('.certification-card').forEach(card => {
     });
 
 })();
+
+// Border glow — glow follows the cursor while hovering each experience card
+document.querySelectorAll('.timeline-content').forEach(card => {
+    card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--glow-x', x + '%');
+        card.style.setProperty('--glow-y', y + '%');
+    });
+});
