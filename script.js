@@ -326,7 +326,7 @@ document.querySelectorAll('.certification-card').forEach(card => {
 
         certifications: {
             keywords: ['certification', 'certifications', 'course', 'courses', 'certified', 'training'],
-            answer: "Sadhik holds certifications including Data Analytics Toolbox (Udemy), Microsoft Advanced Excel 365 Expert, Tally Prime & GST (Relent Cyber College), Power BI, Tableau & Python (The Strategist), Financial Accounting & Analysis (IIM Bangalore, NPTEL), Domain Analytics in Finance using R and Power BI (KPMG), and Data Analytics Essentials (Cisco Networking Academy)."
+            answer: "Sadhik holds certifications including Data Analytics Toolbox (Udemy), Microsoft Advanced Excel 365 Expert, Tally Prime & GST (Relent Cyber College), Power BI, Tableau & Python (The Strategist), Financial Accounting & Analysis (IIM Bangalore, NPTEL), Domain Analytics in Finance using R and Power BI (KPMG), Data Analytics Essentials (Cisco Networking Academy), and Python Essentials 1 (Cisco Networking Academy)."
         },
 
         projectsOverview: {
@@ -537,14 +537,3 @@ document.querySelectorAll('.certification-card').forEach(card => {
     });
 
 })();
-
-// Glare hover — track cursor position over the About photo
-document.querySelectorAll('.glare-hover').forEach(el => {
-    el.addEventListener('mousemove', e => {
-        const rect = el.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        el.style.setProperty('--glare-x', x + '%');
-        el.style.setProperty('--glare-y', y + '%');
-    });
-});
