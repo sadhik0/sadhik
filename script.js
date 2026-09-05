@@ -71,43 +71,54 @@ window.addEventListener('scroll', function() {
     });
 });
 
-// Projects carousel
-(function () {
-    const wrapper = document.querySelector('.carousel-wrapper');
+// Generic carousel engine (used for Projects and Certifications)
+function initCarousel(config) {
+    const wrapper = document.querySelector(config.wrapperSelector);
     if (!wrapper) return;
 
     const viewport = wrapper.querySelector('.carousel-viewport');
     const track = wrapper.querySelector('.carousel-track');
     const cards = Array.from(track.children);
-    const prevBtn = wrapper.querySelector('.carousel-prev');
-    const nextBtn = wrapper.querySelector('.carousel-next');
-    const dotsContainer = document.querySelector('.carousel-dots');
+    const prevBtn = config.arrows ? wrapper.querySelector('.carousel-prev') : null;
+    const nextBtn = config.arrows ? wrapper.querySelector('.carousel-next') : null;
+    const dotsContainer = document.querySelector(config.dotsSelector);
 
-    const GAP = 32; // px, matches CSS gap: 2rem
-    let visibleCount = 3;
+    const GAP = config.gap || 32;
+    let visibleCount = 1;
     let cardWidth = 0;
     let current = 0;
 
     function getVisibleCount() {
         const w = window.innerWidth;
-        if (w <= 640) return 1;
-        if (w <= 900) return 2;
-        return 3;
+        if (w <= 640) return config.mobileCount || 1;
+        if (w <= 900) return config.tabletCount || 2;
+        return config.desktopCount || 3;
+    }
+
+    function getMaxIndex() {
+        return Math.max(0, cards.length - visibleCount);
     }
 
     function layout() {
         visibleCount = getVisibleCount();
         const viewportWidth = viewport.clientWidth;
-        cardWidth = (viewportWidth - GAP * (visibleCount - 1)) / visibleCount;
+        let width = (viewportWidth - GAP * (visibleCount - 1)) / visibleCount;
+
+        // Guard against a bad measurement (0/negative/NaN) so the carousel
+        // never freezes on an invalid transform value.
+        if (!Number.isFinite(width) || width <= 0) {
+            width = cardWidth || 0;
+        }
+        cardWidth = width;
 
         cards.forEach(card => {
             card.style.width = cardWidth + 'px';
         });
 
-        const maxIndex = Math.max(0, cards.length - visibleCount);
+        const maxIndex = getMaxIndex();
         if (current > maxIndex) current = maxIndex;
 
-        buildDots(maxIndex);
+        if (dotsContainer) buildDots(maxIndex);
         update();
     }
 
@@ -117,7 +128,7 @@ window.addEventListener('scroll', function() {
             const dot = document.createElement('button');
             dot.type = 'button';
             dot.className = 'carousel-dot';
-            dot.setAttribute('aria-label', 'Go to project ' + (i + 1));
+            dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
             dot.addEventListener('click', () => {
                 current = i;
                 update();
@@ -127,59 +138,134 @@ window.addEventListener('scroll', function() {
     }
 
     function update() {
-        const maxIndex = Math.max(0, cards.length - visibleCount);
+        const maxIndex = getMaxIndex();
         const offset = current * (cardWidth + GAP);
-        track.style.transform = 'translateX(' + (-offset) + 'px)';
+        if (Number.isFinite(offset)) {
+            track.style.transform = 'translateX(' + (-offset) + 'px)';
+        }
 
-        prevBtn.classList.toggle('carousel-disabled', current === 0);
-        nextBtn.classList.toggle('carousel-disabled', current === maxIndex);
+        if (prevBtn) prevBtn.classList.toggle('carousel-disabled', current === 0);
+        if (nextBtn) nextBtn.classList.toggle('carousel-disabled', current === maxIndex);
 
-        const dots = Array.from(dotsContainer.children);
-        dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+        if (dotsContainer) {
+            const dots = Array.from(dotsContainer.children);
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+        }
     }
 
-    prevBtn.addEventListener('click', () => {
+    function goPrev() {
         current = Math.max(0, current - 1);
         update();
-    });
+    }
 
-    nextBtn.addEventListener('click', () => {
-        const maxIndex = Math.max(0, cards.length - visibleCount);
-        current = Math.min(maxIndex, current + 1);
+    function goNext() {
+        current = Math.min(getMaxIndex(), current + 1);
         update();
-    });
+    }
 
-    // Touch/swipe support
+    if (prevBtn) prevBtn.addEventListener('click', goPrev);
+    if (nextBtn) nextBtn.addEventListener('click', goNext);
+
+    // Touch/swipe support (distinguishes a tap from a real swipe so
+    // tap-to-flip on certification cards still works)
     let touchStartX = 0;
-    let touchEndX = 0;
+    let touchStartY = 0;
+    let draggedFar = false;
 
     viewport.addEventListener('touchstart', e => {
         touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        draggedFar = false;
+    }, { passive: true });
+
+    viewport.addEventListener('touchmove', e => {
+        const dx = Math.abs(e.changedTouches[0].screenX - touchStartX);
+        const dy = Math.abs(e.changedTouches[0].screenY - touchStartY);
+        if (dx > 10 && dx > dy) draggedFar = true;
     }, { passive: true });
 
     viewport.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
+        const touchEndX = e.changedTouches[0].screenX;
         const delta = touchEndX - touchStartX;
-        const maxIndex = Math.max(0, cards.length - visibleCount);
         if (delta > 50) {
-            current = Math.max(0, current - 1);
-            update();
+            goPrev();
         } else if (delta < -50) {
-            current = Math.min(maxIndex, current + 1);
-            update();
+            goNext();
         }
+        if (config.onSwipeEnd) config.onSwipeEnd(draggedFar);
     }, { passive: true });
 
-    window.addEventListener('resize', layout);
-    layout();
-})();
+    // Optional mouse-wheel navigation (desktop certifications carousel)
+    if (config.wheel) {
+        let wheelLocked = false;
+        wrapper.addEventListener('wheel', e => {
+            if (Math.abs(e.deltaY) < 10) return;
+            e.preventDefault();
+            if (wheelLocked) return;
+            wheelLocked = true;
+            if (e.deltaY > 0) goNext(); else goPrev();
+            setTimeout(() => { wheelLocked = false; }, 450);
+        }, { passive: false });
+    }
 
-// Certification flip cards
+    // Re-measure whenever the viewport's real pixel size changes for ANY
+    // reason (window resize, font/icon load reflow, zoom) — not just the
+    // classic 'resize' event, which can miss late layout shifts.
+    if (window.ResizeObserver) {
+        new ResizeObserver(() => layout()).observe(viewport);
+    } else {
+        window.addEventListener('resize', layout);
+    }
+    window.addEventListener('load', layout);
+    layout();
+
+    return { goPrev, goNext };
+}
+
+// Projects carousel
+initCarousel({
+    wrapperSelector: '.carousel-wrapper',
+    dotsSelector: '.carousel-dots',
+    arrows: true,
+    wheel: false,
+    desktopCount: 3,
+    tabletCount: 2,
+    mobileCount: 1,
+    gap: 32
+});
+
+// Certifications carousel — wheel-to-navigate (desktop), swipe (mobile), no arrows
+let certJustDragged = false;
+initCarousel({
+    wrapperSelector: '.cert-carousel-wrapper',
+    dotsSelector: '.cert-carousel-dots',
+    arrows: false,
+    wheel: true,
+    desktopCount: 3,
+    tabletCount: 2,
+    mobileCount: 1,
+    gap: 24,
+    onSwipeEnd: function (draggedFar) {
+        if (draggedFar) {
+            certJustDragged = true;
+            setTimeout(() => { certJustDragged = false; }, 300);
+        }
+    }
+});
+
+// Certification flip cards (tap/click to flip; suppressed right after a swipe)
 document.querySelectorAll('.certification-card').forEach(card => {
     function toggleFlip() {
+        if (certJustDragged) return;
         card.classList.toggle('flipped');
     }
     card.addEventListener('click', toggleFlip);
+    card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleFlip();
+        }
+    });
 });
 
 // ==========================================================
@@ -305,7 +391,7 @@ document.querySelectorAll('.certification-card').forEach(card => {
     const suggestedStarters = [
         "What projects has Sadhik built?",
         "What are Sadhik's key skills?",
-        "Tell me about Sadhik"
+        "Tell me about TaxPilot"
     ];
 
     const fallbackAnswer = "I'm currently designed to answer questions about Sadhik's portfolio, education, skills, experience and projects. Try asking me about his projects, skills, education or career interests.";
@@ -451,3 +537,14 @@ document.querySelectorAll('.certification-card').forEach(card => {
     });
 
 })();
+
+// Glare hover — track cursor position over the About photo
+document.querySelectorAll('.glare-hover').forEach(el => {
+    el.addEventListener('mousemove', e => {
+        const rect = el.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        el.style.setProperty('--glare-x', x + '%');
+        el.style.setProperty('--glare-y', y + '%');
+    });
+});
