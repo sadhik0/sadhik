@@ -31,6 +31,42 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// Mobile hamburger menu
+(function () {
+    const toggle = document.getElementById('nav-toggle');
+    const navLinksEl = document.getElementById('nav-links');
+    if (!toggle || !navLinksEl) return;
+
+    function openMenu() {
+        navLinksEl.classList.add('open');
+        toggle.classList.add('active');
+        toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMenu() {
+        navLinksEl.classList.remove('open');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+    }
+
+    toggle.addEventListener('click', function () {
+        navLinksEl.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    // Close the menu once a section link is tapped
+    navLinksEl.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    // Close if tapping anywhere outside the open menu
+    document.addEventListener('click', function (e) {
+        if (!navLinksEl.classList.contains('open')) return;
+        if (!navLinksEl.contains(e.target) && !toggle.contains(e.target)) {
+            closeMenu();
+        }
+    });
+})();
+
 // Fade in animation on scroll
 const observerOptions = {
     threshold: 0.1,
@@ -410,8 +446,8 @@ document.querySelectorAll('.certification-card').forEach(card => {
         },
 
         contact: {
-            keywords: ['contact', 'email', 'phone', 'reach him', 'linkedin', 'connect'],
-            answer: "You can reach Sadhik at sadhiksalim001@gmail.com, by phone at +91 95447 32071, or connect on LinkedIn at linkedin.com/in/sadhik-salim. There's also a Get In Touch section further down this page."
+            keywords: ['contact', 'email', 'phone', 'reach him', 'linkedin', 'connect', 'github'],
+            answer: "You can reach Sadhik at sadhiksalim001@gmail.com, by phone at +91 95447 32071, on LinkedIn at linkedin.com/in/sadhik-salim, or on GitHub at github.com/sadhik0. There's also a Get In Touch section further down this page."
         }
     };
 
