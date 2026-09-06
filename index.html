@@ -9,10 +9,10 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+       <nav class="navbar">
         <div class="nav-container">
             <div class="logo">Sadhik Salim</div>
-            <ul class="nav-links">
+            <ul class="nav-links" id="nav-links">
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
@@ -21,6 +21,11 @@
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
 
@@ -530,6 +535,15 @@
                     <p>linkedin.com/in/sadhik-salim</p>
                 </div>
             </a>
+            <a class="contact-item" href="https://github.com/sadhik0" target="_blank" rel="noopener">
+                <div class="contact-icon">
+                    <i class="fab fa-github"></i>
+                </div>
+                <div>
+                    <h3>GitHub</h3>
+                    <p>github.com/sadhik0</p>
+                </div>
+            </a>
         </div>
     </section>
 
@@ -537,6 +551,7 @@
     <footer class="footer">
         <div class="social-links">
             <a href="https://www.linkedin.com/in/sadhik-salim" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/sadhik0" target="_blank"><i class="fab fa-github"></i></a>
             <a href="mailto:sadhiksalim001@gmail.com"><i class="fas fa-envelope"></i></a>
             <a href="tel:+919544732071"><i class="fas fa-phone"></i></a>
         </div>
