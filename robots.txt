@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sadhik0.github.io/sadhik/sitemap.xml
