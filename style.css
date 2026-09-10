@@ -530,6 +530,13 @@ body {
     transform-origin: top left;
     pointer-events: none;
 }
+/* Static screenshot fallback (used where a live iframe is blocked, e.g. ReconPro) */
+.project-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+}
 
 .project-badge {
     position: absolute;
