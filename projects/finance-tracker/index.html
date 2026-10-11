@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../favicon.png">
+    <title>Personal Finance Tracker | Case Study | Sadhik Salim</title>
+    <meta name="description" content="Case study: a private, personal finance management PWA built around real-life financial workflows - budgeting, transfers, loan repayment, investments and family support classified correctly.">
+    <link rel="canonical" href="https://sadhik0.github.io/sadhik/projects/finance-tracker/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Personal Finance Tracker | Case Study">
+    <meta property="og:description" content="A private, personal finance management PWA built around real-life financial workflows.">
+    <meta property="og:url" content="https://sadhik0.github.io/sadhik/projects/finance-tracker/">
+    <meta property="og:image" content="https://sadhik0.github.io/sadhik/assets/projects/finance-tracker/card.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="case-study.css">
+</head>
+<body class="case-study-page">
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a class="logo cs-logo" href="../../">Sadhik Salim</a>
+            <a class="cs-back" href="../../#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+        </div>
+    </nav>
+
+    <main class="cs-main">
+
+        <header class="cs-hero">
+            <span class="cs-tag">Case Study &middot; PWA &middot; Finance</span>
+            <h1>Personal Finance Tracker</h1>
+            <p class="cs-lead">A private, personal finance management PWA built around real-life financial workflows.</p>
+            <dl class="cs-meta">
+                <div><dt>Role</dt><dd>Personal project &mdash; product requirements, financial workflow design, implementation, testing and deployment</dd></div>
+                <div><dt>Stack</dt><dd>Next.js &middot; React &middot; TypeScript &middot; MongoDB Atlas &middot; Vercel</dd></div>
+            </dl>
+            <div class="cs-links">
+                <a class="btn-featured btn-primary" href="#demo"><i class="fas fa-play"></i> Watch Demo</a>
+                <a class="btn-featured btn-outline" href="https://github.com/sadhik0/personal-finance-tracker" target="_blank" rel="noopener"><i class="fab fa-github"></i> Source Code</a>
+                <a class="btn-featured btn-outline" href="https://personal-finance-tracker-chi-steel.vercel.app/" target="_blank" rel="noopener">Live App (invite-only) <i class="fas fa-arrow-up-right-from-square"></i></a>
+            </div>
+        </header>
+
+        <section class="cs-section" id="demo">
+            <h2>Demo walkthrough</h2>
+            <div class="cs-video">
+                <video controls preload="metadata" playsinline poster="../../assets/projects/finance-tracker/poster.jpg">
+                    <source src="../../assets/projects/finance-tracker/demo.mp4" type="video/mp4">
+                    Your browser does not support embedded video.
+                </video>
+            </div>
+            <p class="cs-note"><i class="fas fa-circle-info"></i> The live app holds private data, so this 60-second walkthrough uses modified, illustrative figures instead of a public guest login.</p>
+        </section>
+
+        <section class="cs-section cs-scope">
+            <p><strong>Project scope:</strong> I built this application for my own personal use. It is an invitation-only, small-scale project &mdash; not a commercial finance service, enterprise platform, or production banking product.</p>
+        </section>
+
+        <section class="cs-section">
+            <h2>1. The problem</h2>
+            <p>I wanted a clearer picture of my finances than a basic monthly expense tracker could provide. My financial life includes day-to-day spending, savings, investments, education-loan repayments, family support, multiple accounts and financial reporting. Treating every movement of money as income or expense can make reports misleading &mdash; for example, moving money between my own accounts is not spending, and money allocated toward an investment should not be treated like an ordinary purchase.</p>
+            <p>I also wanted budgeting rules that matched my circumstances. A standard 50/30/20 framework is a useful benchmark, but someone managing an education loan may prefer a loan-focused plan. I needed the ability to choose a plan and record financial activity in a way that preserves the meaning of each transaction.</p>
+        </section>
+
+        <section class="cs-section">
+            <h2>2. The solution</h2>
+            <p>I designed and built a private finance tracker that brings transaction entry, budgeting, accounts, analytics and statements into one responsive web application that can also be installed as a Progressive Web App (PWA).</p>
+            <p>The application is designed around <strong>manual, user-controlled financial records</strong>. I enter and review transactions instead of connecting bank accounts or importing sensitive financial activity automatically. Authentication and invitation-only registration keep the application private.</p>
+            <p>The objective was not to reproduce every feature of a commercial finance platform. It was to build a practical tool tailored to the financial workflows I actually need.</p>
+        </section>
+
+        <section class="cs-section">
+            <h2>3. Key features</h2>
+            <ul class="cs-features">
+                <li><i class="fas fa-chart-pie"></i><div><strong>Dashboard and overview</strong>Key figures and charts for income, expenses, savings, investments and cash flow.</div></li>
+                <li><i class="fas fa-right-left"></i><div><strong>Transactions and accounts</strong>Record activity across accounts while distinguishing income, expenses and transfers.</div></li>
+                <li><i class="fas fa-sliders"></i><div><strong>Flexible budgeting</strong>Standard 50/30/20, a loan-focused 40/20/20/20 plan, or custom percentages that total 100%.</div></li>
+                <li><i class="fas fa-graduation-cap"></i><div><strong>Education-loan tracking</strong>Record repayments and monitor the loan within the broader financial picture.</div></li>
+                <li><i class="fas fa-seedling"></i><div><strong>Investments and provident fund</strong>Investment and PF amounts stay distinguishable from ordinary spending.</div></li>
+                <li><i class="fas fa-people-roof"></i><div><strong>Family-support tracking</strong>Support received from family is recorded separately from support given.</div></li>
+                <li><i class="fas fa-chart-line"></i><div><strong>Analytics and statements</strong>Trends plus income/expense, cash-flow and related reports.</div></li>
+                <li><i class="fas fa-file-export"></i><div><strong>PDF and Excel exports</strong>Export financial information for review and recordkeeping.</div></li>
+                <li><i class="fas fa-lock"></i><div><strong>Privacy and access controls</strong>Authentication, invitation-based registration and a PIN lock.</div></li>
+                <li><i class="fas fa-mobile-screen"></i><div><strong>Responsive and installable</strong>Works on desktop or mobile as a web app / PWA.</div></li>
+            </ul>
+            <p class="cs-note">Savings Goals and Expense Projects (for example saving for a laptop or analysing a trip) are future enhancements, not current features.</p>
+        </section>
+
+        <section class="cs-section">
+            <h2>4. Key design decision: classify money movement correctly</h2>
+            <p>One of the central challenges was representing financial activity without double-counting it.</p>
+            <div class="cs-table-wrap">
+                <table class="cs-table">
+                    <thead><tr><th>Activity</th><th>How the app treats it</th><th>Why it matters</th></tr></thead>
+                    <tbody>
+                        <tr><td>Salary received</td><td>Income</td><td>Records money earned</td></tr>
+                        <tr><td>Transfer between my own accounts</td><td>Transfer</td><td>Does not inflate income or expenses</td></tr>
+                        <tr><td>Food or travel purchase</td><td>Expense</td><td>Contributes to spending analysis</td></tr>
+                        <tr><td>Investment contribution</td><td>Investment / savings tracking</td><td>Kept distinct from normal consumption</td></tr>
+                        <tr><td>Education-loan payment</td><td>Loan repayment</td><td>Makes debt payments visible separately</td></tr>
+                        <tr><td>Family support received or given</td><td>Separate family-support flow</td><td>Shows family-related money movement clearly</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>I keep the budget framework separate from transaction classification: the framework defines the plan, while transactions record what actually happened.</p>
+        </section>
+
+        <section class="cs-section">
+            <h2>5. Technology stack</h2>
+            <div class="cs-chips">
+                <span>Next.js</span><span>React</span><span>TypeScript</span><span>MongoDB Atlas</span><span>Mongoose</span><span>Vercel</span><span>Git &amp; GitHub</span><span>PWA</span>
+            </div>
+            <p>The project uses MongoDB Atlas's free cluster (documented 512 MB storage limit). This was an intentional low-cost choice for a personal-scale application, not a claim that the deployment is sized for high traffic, large datasets or enterprise use.</p>
+        </section>
+
+        <section class="cs-section">
+            <h2>6. My role and approach</h2>
+            <p>I drove the project from personal-finance requirements through product decisions to a working deployment:</p>
+            <ul class="cs-list">
+                <li>identifying the financial questions the app needed to answer;</li>
+                <li>defining how different transaction types should be classified;</li>
+                <li>deciding how budgeting, loan tracking, accounts and reports work together;</li>
+                <li>shaping the responsive interface and private-access experience;</li>
+                <li>integrating the application with its database and deployment environment;</li>
+                <li>testing the main workflows locally and checking the deployed application.</li>
+            </ul>
+            <p>I used AI assistance during development for coding guidance, debugging and iteration. I remained responsible for defining the requirements, evaluating the proposed changes and checking that the resulting workflows matched the intended financial logic.</p>
+        </section>
+
+        <section class="cs-section">
+            <h2>7. Outcome</h2>
+            <p>The outcome is a deployed, working personal tool that brings several parts of my financial recordkeeping into one place. It shows how I translated a real-world finance problem into software rules, data structures, user workflows and reporting screens.</p>
+            <p>It also gave me practice in full-stack product development: moving from requirements to implementation, resolving workflow and interface issues, testing changes, and deploying a private application. I do not claim quantified savings, investment performance or business impact, because I have not established independently measured results for those outcomes.</p>
+        </section>
+
+        <section class="cs-section">
+            <h2>8. Why build it instead of using an existing app?</h2>
+            <p>Established products such as YNAB, Wallet by BudgetBakers and Monarch Money offer broader capabilities, and this project is not meant to compete with them feature-for-feature. I chose to build my own tracker for <strong>fit and control</strong>: my exact budget presets, separate education-loan and family-support views, manual transaction review, and reporting shaped around my own financial habits &mdash; and as a way to learn by solving a concrete finance problem.</p>
+        </section>
+
+        <section class="cs-section">
+            <h2>9. Limitations and next steps</h2>
+            <p>This is a personal-scale project. It does not connect to banks, move money, provide financial advice, or claim bank-grade or enterprise-grade security. The MongoDB free tier has limited capacity and no paid-tier backup features, so important records should be backed up separately.</p>
+            <p>Roadmap ideas: a more flexible dashboard period selector, savings goals for major purchases, expense projects for trips or events, and further automated tests. These are ideas, not current functionality.</p>
+        </section>
+
+        <section class="cs-section cs-takeaway">
+            <p><strong>Takeaway:</strong> Personal Finance Tracker is a practical example of finance-led problem solving through software. I identified a real gap in my own workflow, modelled the financial distinctions that mattered, and built and deployed a tool around them.</p>
+            <div class="cs-links">
+                <a class="btn-featured btn-primary" href="../../#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                <a class="btn-featured btn-outline" href="https://github.com/sadhik0/personal-finance-tracker" target="_blank" rel="noopener"><i class="fab fa-github"></i> Source Code</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="cs-footer">&copy; Sadhik Salim</footer>
+</body>
+</html>

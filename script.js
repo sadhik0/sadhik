@@ -396,8 +396,13 @@ document.querySelectorAll('.certification-card').forEach(card => {
 
         projectsOverview: {
             keywords: ['projects', 'what has he built', 'what has sadhik built', 'portfolio projects', 'apps'],
-            answer: "Sadhik has built five finance-focused web tools: ReconPro Lite (ledger/bank reconciliation), CleanXcel (Excel data-cleaning automation), BankLens (bank statement analytics), TaxPilot (income tax & GST planning), and FinancialScope (financial statement analysis). All are client-side, browser-based tools — try the links in the Projects section above!",
-            followUps: ["Tell me about TaxPilot", "Tell me about FinancialScope", "What is ReconPro Lite?"]
+            answer: "Sadhik's featured projects are the Personal Finance Tracker (a private budgeting and cash-flow PWA, with a demo video and case study) and ReconPro (financial reconciliation automation). He has also built browser-based tools: ReconPro Lite (ledger/bank reconciliation), CleanXcel (Excel data-cleaning automation), BankLens (bank statement analytics), TaxPilot (income tax & GST planning), and FinancialScope (financial statement analysis). Try the links in the Projects section above!",
+            followUps: ["Tell me about the Finance Tracker", "Tell me about TaxPilot", "What is ReconPro Lite?"]
+        },
+        financeTracker: {
+            keywords: ['tell me about the finance tracker', 'finance tracker', 'personal finance', 'budget app', 'pwa', 'case study', 'demo video'],
+            answer: "Personal Finance Tracker is a private, invitation-only PWA Sadhik built for his own finances (Next.js, TypeScript, MongoDB Atlas, Vercel). It classifies income, transfers, investments, loan repayments and family support correctly so reports don't double-count, and supports 50/30/20, loan-focused or custom budget plans. Watch the demo or read the case study in the Featured Projects section.",
+            followUps: ["View Projects", "View Skills"]
         },
 
         taxPilot: {

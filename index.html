@@ -145,6 +145,57 @@
     <!-- Projects Section -->
     <section id="projects" class="section">
         <h2 class="section-title fade-in">Projects</h2>
+        <!-- ============ FEATURED PROJECTS ============
+             Two permanent cards, outside the carousel. To add/replace one, see README.md.
+             Assets live in assets/projects/<project-name>/ -->
+        <div class="featured-projects fade-in">
+            <h3 class="projects-subtitle">Featured Projects</h3>
+            <div class="featured-grid">
+
+                <!-- Featured 1: Personal Finance Tracker -->
+                <article class="featured-card">
+                    <a class="featured-media featured-media--logo" href="https://personal-finance-tracker-chi-steel.vercel.app/" target="_blank" rel="noopener" aria-label="Open Personal Finance Tracker live app (invite-only login)">
+                        <picture>
+                            <source media="(max-width: 640px)" srcset="assets/projects/finance-tracker/logo.png">
+                            <img src="assets/projects/finance-tracker/card.png" alt="Personal Finance Tracker &mdash; a private-first financial management workspace" loading="lazy" width="627" height="323">
+                        </picture>
+                        <span class="project-preview-overlay"><span><i class="fas fa-arrow-up-right-from-square"></i> Visit Site</span></span>
+                    </a>
+                    <div class="featured-body">
+                        <span class="featured-tag">PWA &middot; Finance</span>
+                        <h3>Personal Finance Tracker</h3>
+                        <p>A private finance PWA that classifies every rupee correctly &mdash; income, transfers, investments, loan repayments and family support &mdash; so budgets and reports are not distorted by double-counting.</p>
+                        <div class="featured-actions">
+                            <a class="btn-featured btn-primary" href="projects/finance-tracker/#demo"><i class="fas fa-play"></i> Watch Demo</a>
+                            <a class="btn-featured btn-outline" href="projects/finance-tracker/">Case Study <i class="fas fa-arrow-right"></i></a>
+                            <a class="featured-note" href="https://personal-finance-tracker-chi-steel.vercel.app/" target="_blank" rel="noopener">Live App (invite-only) <i class="fas fa-arrow-up-right-from-square"></i></a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Featured 2: ReconPro -->
+                <article class="featured-card">
+                    <a class="featured-media" href="https://reconpro-frontend.vercel.app/" target="_blank" rel="noopener" aria-label="Open ReconPro">
+                        <img src="assets/projects/reconpro/preview.png" alt="ReconPro financial reconciliation automation" loading="lazy">
+                        <span class="project-preview-overlay"><span><i class="fas fa-arrow-up-right-from-square"></i> Visit Site</span></span>
+                    </a>
+                    <div class="featured-body">
+                        <span class="featured-tag">Application &middot; Automation</span>
+                        <h3>ReconPro &mdash; Financial Reconciliation Automation</h3>
+                        <p>Streamlines financial reconciliation by matching transaction records, identifying discrepancies, and making exceptions easier to investigate.</p>
+                        <div class="featured-actions">
+                            <a class="btn-featured btn-primary" href="https://reconpro-frontend.vercel.app/" target="_blank" rel="noopener">View Project <i class="fas fa-arrow-up-right-from-square"></i></a>
+                            <span class="featured-note-text">Sign-in required</span>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+        <!-- ============ END FEATURED PROJECTS ============ -->
+
+        <h3 class="projects-subtitle more-projects-title fade-in">More Projects <span class="projects-subtitle-hint">Drag or swipe &rarr;</span></h3>
+
         <div class="carousel-wrapper fade-in">
             <button class="carousel-arrow carousel-prev" aria-label="Previous project" type="button">
                 <i class="fas fa-chevron-left"></i>
@@ -152,20 +203,6 @@
 
             <div class="carousel-viewport">
                 <div class="carousel-track">
-
-                                        <a class="project-card" href="https://reconpro-frontend.vercel.app/" target="_blank" rel="noopener">
-                        <div class="project-preview">
-                            <span class="project-badge">Full Product </span>
-                            <img src="reconpro-preview.png" alt="ReconPro sign-in screen" loading="lazy" class="project-preview-img">
-                            <div class="project-preview-overlay">
-                                <span><i class="fas fa-arrow-up-right-from-square"></i> Visit Site</span>
-                            </div>
-                        </div>
-                        <div class="project-info">
-                            <h3>ReconPro</h3>
-                            <p>The full production version of ReconPro &mdash; a hosted reconciliation platform with user accounts and saved data. Sign-in required to use; the ReconPro Lite card below offers the same core matching logic with no login, right in the browser.</p>
-                        </div>
-                    </a>
 
                     <a class="project-card" href="https://sadhik0.github.io/ReconPro-Lite/" target="_blank" rel="noopener">
                         <div class="project-preview">

@@ -1,0 +1,180 @@
+/* Case study page styles. Base theme (colors, fonts, navbar, .btn-featured) comes from ../../style.css */
+
+.cs-logo { text-decoration: none; }
+
+.cs-back {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+}
+.cs-back:hover { color: var(--accent-color); }
+
+.cs-main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 3rem;
+}
+
+.cs-hero { margin-bottom: 3rem; }
+
+.cs-tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--accent-color);
+    border: 1px solid rgba(6, 182, 212, 0.4);
+    background: rgba(6, 182, 212, 0.08);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+}
+
+.cs-hero h1 {
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    line-height: 1.15;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.8rem;
+}
+
+.cs-lead {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.8rem;
+}
+
+.cs-meta {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.8rem;
+    padding: 1.2rem 1.4rem;
+    background: var(--card-bg);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 16px;
+}
+.cs-meta dt {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    margin-bottom: 0.2rem;
+}
+.cs-meta dd { color: var(--text-primary); font-size: 0.97rem; }
+
+.cs-links { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+.cs-section { margin-bottom: 2.8rem; scroll-margin-top: 5.5rem; }
+
+.cs-section h2 {
+    font-size: 1.55rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.cs-section p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 1.02rem;
+    line-height: 1.75;
+}
+.cs-section p strong { color: var(--text-primary); }
+
+.cs-video {
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    background: #000;
+    box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+}
+.cs-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+
+.cs-note {
+    font-size: 0.88rem !important;
+    color: var(--text-secondary);
+    margin-top: 0.9rem;
+}
+.cs-note i { color: var(--accent-color); margin-right: 0.35rem; }
+
+.cs-scope {
+    padding: 1rem 1.3rem;
+    border-left: 3px solid var(--primary-color);
+    background: rgba(99, 102, 241, 0.08);
+    border-radius: 0 12px 12px 0;
+}
+.cs-scope p { margin: 0; }
+
+.cs-features {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+.cs-features li {
+    display: flex;
+    gap: 0.9rem;
+    padding: 1rem 1.1rem;
+    background: var(--card-bg);
+    border: 1px solid rgba(99, 102, 241, 0.18);
+    border-radius: 14px;
+    color: var(--text-secondary);
+    font-size: 0.93rem;
+    line-height: 1.5;
+}
+.cs-features li > i {
+    color: var(--accent-color);
+    font-size: 1.1rem;
+    margin-top: 0.2rem;
+    width: 1.3rem;
+    text-align: center;
+    flex-shrink: 0;
+}
+.cs-features strong { display: block; color: var(--text-primary); margin-bottom: 0.15rem; }
+
+.cs-table-wrap { overflow-x: auto; margin-bottom: 1rem; border-radius: 14px; border: 1px solid rgba(99, 102, 241, 0.2); }
+.cs-table { width: 100%; border-collapse: collapse; font-size: 0.93rem; min-width: 560px; }
+.cs-table th, .cs-table td { padding: 0.8rem 1rem; text-align: left; border-bottom: 1px solid rgba(99, 102, 241, 0.12); }
+.cs-table th { background: var(--card-bg); color: var(--accent-color); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.cs-table td { color: var(--text-secondary); }
+.cs-table td:first-child { color: var(--text-primary); }
+.cs-table tr:last-child td { border-bottom: none; }
+
+.cs-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.1rem; }
+.cs-chips span {
+    padding: 0.35rem 0.9rem;
+    border-radius: 20px;
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.35);
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+.cs-list { color: var(--text-secondary); padding-left: 1.3rem; margin-bottom: 1rem; line-height: 1.8; }
+
+.cs-takeaway {
+    padding: 1.6rem;
+    background: var(--card-bg);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    border-radius: 18px;
+}
+
+.cs-footer {
+    text-align: center;
+    padding: 2rem 1rem 3rem;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+@media (max-width: 640px) {
+    .cs-main { padding-top: 6rem; }
+    .cs-features { grid-template-columns: 1fr; }
+    .cs-back span { display: none; }
+    .nav-container { padding: 0 1rem; }
+    .logo { font-size: 1.4rem; }
+}
